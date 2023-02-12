@@ -1,0 +1,9 @@
+{
+  "name": "chatgpt-extension",
+  "version": "1.0.0",
+  "author": "Hai Phan <hai.phan@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "package": "zip -u -r build/package.zip manifest.json background.js *.html js || true"
+  }
+}

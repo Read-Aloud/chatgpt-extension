@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Read Aloud: ChatGPT",
+  "short_name": "RA: ChatGPT",
+  "description": "Read aloud ChatGPT conversations using text-to-speech",
+  "version": "1.0.0",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "img/icon-128.png"
+  },
+  "permissions": [
+    "offscreen",
+    "storage",
+    "tts"
+  ],
+  "content_scripts": [{
+    "matches": [
+      "https://chat.openai.com/chat"
+    ],
+    "js": [
+      "js/common.js",
+      "js/content-script.js"
+    ]
+  }]
+}
