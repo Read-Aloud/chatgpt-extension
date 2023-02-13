@@ -28,3 +28,11 @@ function errorToJson(err) {
     return err
   }
 }
+
+rxjs.fromMutationObserver = function(node, options) {
+  return new rxjs.Observable(subscriber => {
+    const observer = new MutationObserver(records => subscriber.next(records))
+    observer.observe(node, options)
+    return () => observer.disconnect()
+  })
+}

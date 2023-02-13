@@ -17,9 +17,10 @@
   ],
   "content_scripts": [{
     "matches": [
-      "https://chat.openai.com/chat"
+      "https://chat.openai.com/chat/*"
     ],
     "js": [
+      "js/rxjs.umd.js",
       "js/common.js",
       "js/content-script.js"
     ]
