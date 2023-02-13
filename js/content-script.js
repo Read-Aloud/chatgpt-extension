@@ -1,19 +1,25 @@
 
-const root = document.getElementById("__next")
-
-rxjs.fromMutationObserver(root, {childList: true})
+const mainObservable = rxjs.fromMutationObserver(document.getElementById("__next"), {childList: true})
   .pipe(
     rxjs.concatMap(records => rxjs.from(records)),
     rxjs.concatMap(record => rxjs.from(record.addedNodes)),
-    rxjs.startWith(root),
-    rxjs.concatMap(node => {
-      const chatLog = node.querySelector(".items-center.text-sm")
-      if (chatLog) return rxjs.of(chatLog)
-      console.error("Chat log node not found under", node)
-      return rxjs.EMPTY
-    }),
-    rxjs.switchMap(node => rxjs.fromMutationObserver(node, {childList: true})),
+    rxjs.filter(node => node.nodeType == 1),
+    rxjs.startWith(document),
+    rxjs.concatMap(el => rxjs.from(el.getElementsByTagName("main")).pipe(rxjs.take(1))),
+    rxjs.distinctUntilChanged(),
+    rxjs.tap(main => console.debug("Main changed", main))
+  )
+
+const newestParagraphObservable = mainObservable
+  .pipe(
+    rxjs.debounceTime(3*1000),
+    rxjs.switchMap(main => rxjs.fromMutationObserver(main, {subtree: true, childList: true})),
     rxjs.concatMap(records => rxjs.from(records)),
     rxjs.concatMap(record => rxjs.from(record.addedNodes)),
+    rxjs.filter(node => node.nodeType == 1),
+    rxjs.concatMap(el => rxjs.from(el.getElementsByTagName("p")).pipe(rxjs.takeLast(1))),
+    rxjs.distinctUntilChanged(),
+    rxjs.tap(para => console.debug("Newest paragraph", para))
   )
-  .subscribe(node => console.log("Chat entry node added", node))
+
+newestParagraphObservable.subscribe()
