@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Read Aloud: ChatGPT",
-  "short_name": "RA: ChatGPT",
-  "description": "Read aloud ChatGPT conversations using text-to-speech",
+  "name": "TalkGPT: A ChatGPT extension",
+  "short_name": "TalkGPT",
+  "description": "A voice extension for ChatGPT",
   "version": "1.0.0",
   "action": {
     "default_popup": "popup.html"

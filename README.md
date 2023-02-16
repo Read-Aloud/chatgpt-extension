@@ -1,2 +1,2 @@
 # About
-A text-to-speech extension for ChatGPT.
+A voice extension for ChatGPT.

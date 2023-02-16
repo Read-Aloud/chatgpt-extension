@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Read Aloud: ChatGPT</title>
+    <title>TalkGPT</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/popup.js"></script>
     <style>
+      body {
+        min-width: 350px;
+      }
       .title-link {
         text-decoration: initial;
         color: initial;
@@ -15,15 +20,15 @@
     </style>
   </head>
   <body class="p-4">
-    <a target="_blank" href="https://github.com/read-aloud/chatgpt-extension" class="title-link">
-      <h2 class="text-nowrap">Read Aloud: ChatGPT</h2>
+    <a target="TalkGPT" href="https://chat.openai.com/chat" class="title-link">
+      <h2 class="text-nowrap">TalkGPT</h2>
     </a>
-    <p>Automatically read aloud ChatGPT conversations using text-to-speech</p>
-    <form>
-      <div class="form-check form-switch">
-        <input type="checkbox" class="form-check-input" id="cbEnable" checked>
-        <label for="cbEnable" class="form-check-label">Enable</label>
-      </div>
-    </form>
+    <div class="mt-3 form-floating">
+      <select class="form-select" value="" id="selVoice">
+        <option value="[off]">Disabled</option>
+        <option value="">Auto select</option>
+      </select>
+      <label for="selVoice">Voice:</label>
+    </div>
   </body>
 </html>
