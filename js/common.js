@@ -1,6 +1,6 @@
 
 function registerMessageListener(name, handlers) {
-  brapi.runtime.onMessage.addListener(
+  chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
       if (request.dest == name) {
         handle(request)
@@ -29,10 +29,12 @@ function errorToJson(err) {
   }
 }
 
-rxjs.fromMutationObserver = function(node, options) {
-  return new rxjs.Observable(subscriber => {
-    const observer = new MutationObserver(records => subscriber.next(records))
-    observer.observe(node, options)
-    return () => observer.disconnect()
-  })
+if (typeof rxjs != "undefined") {
+  rxjs.fromMutationObserver = function(node, options) {
+    return new rxjs.Observable(subscriber => {
+      const observer = new MutationObserver(records => subscriber.next(records))
+      observer.observe(node, options)
+      return () => observer.disconnect()
+    })
+  }
 }
